@@ -1,7 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace NoodleEater
+namespace NoodleEater.Canvas
 {
     public delegate void MousePointerEnterDelegate(bool enter);
     public class MousePointerHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -16,6 +17,18 @@ namespace NoodleEater
         }
 
         public void OnPointerExit(PointerEventData eventData)
+        {
+            IsMouseEnter = false;
+            OnMousePointerEnter?.Invoke(false);
+        }
+
+        private void OnMouseEnter()
+        {
+            IsMouseEnter = true;
+            OnMousePointerEnter?.Invoke(true);
+        }
+
+        private void OnMouseExit()
         {
             IsMouseEnter = false;
             OnMousePointerEnter?.Invoke(false);
