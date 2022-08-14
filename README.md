@@ -13,4 +13,4 @@ Inspired by Unreal Engine `UPROPERTY(meta=(BindWidget))`. The binding is created
 <!-- For more detail see [here]() -->
 
 ### Pointer Handler
-This component handle pointer enter and exit in UI or in GameObject.
+This component handle pointer enter and exit in UI or in GameObject. Add this component to your gameobject and listen to the delegate.
