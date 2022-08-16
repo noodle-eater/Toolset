@@ -14,7 +14,7 @@ Unity UI related tools,
 ### UI Binding
 
 Inspired by Unreal Engine `UPROPERTY(meta=(BindWidget))`. The binding is created alongside GameCanvas framework.
-<!-- For more detail see [here]() -->
+For more detail see [here](https://noodle-eater.github.io/posts/ui-binding-unity/)
 
 ### Pointer Handler
 
