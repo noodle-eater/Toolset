@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NoodleEater.Utility;
+using UnityEditor;
 using UnityEngine;
 
 namespace NoodleEater.Canvas
@@ -12,7 +13,7 @@ namespace NoodleEater.Canvas
 
         public void Awake()
         {
-            IEnumerable<CanvasUI> result = ReflectionUtil.GetEnumerableOfType<CanvasUI>();
+            var result = ReflectionUtil.GetEnumerableOfType<CanvasUI>();
 
             foreach(CanvasUI ui in result) 
             {
@@ -24,11 +25,18 @@ namespace NoodleEater.Canvas
             fields.ToList().ForEach(item => 
             {
                 var components = FindObjectsOfType(item.FieldType, true);
+                var canFindRef = false;
                 foreach(var comp in components) {
                     if(comp.name == item.Name) {
                         var source = GetUI(item.DeclaringType);
                         item.SetValue(source, comp);
+                        canFindRef = true;
                     }
+                }
+                
+                if (!canFindRef)
+                {
+                    Debug.LogError($"[Game Canvas] Failed to Bind {item.DeclaringType}.{item.Name}, cannot find reference.");
                 }
             });
 
