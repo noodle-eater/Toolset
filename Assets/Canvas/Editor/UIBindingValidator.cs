@@ -9,14 +9,30 @@ namespace NoodleEater.Canvas.Editor
     [InitializeOnLoad]
     public static class UIBindingValidator
     {
+        private static string validationKey = "CanValidate";
+
         static UIBindingValidator()
         {
+            EditorApplication.delayCall += DeferredBinding;
+            EditorApplication.quitting += () => EditorPrefs.SetBool(validationKey, false);
+        }
+
+        private static void DeferredBinding()
+        {
+            EditorPrefs.SetBool(validationKey, true);
+            EditorApplication.delayCall -= DeferredBinding;
             EditorApplication.hierarchyChanged += ValidateUIBinding;
         }
-        
+
         [DidReloadScripts]
         public static void ValidateUIBinding()
         {
+            var canValidate = EditorPrefs.GetBool(validationKey);
+            if(!canValidate) 
+            {
+                return;
+            }
+
             var fields = ReflectionUtil.GetFieldWithAttribute<BindUI>();
             
             fields.ToList().ForEach(item => 
