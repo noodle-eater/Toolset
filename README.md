@@ -12,7 +12,7 @@ For more detail see [here](https://noodle-eater.github.io/posts/enum-generator-i
 
 ## Canvas
 
-Unity UI related tools,
+Unity UI related tools such as,
 
 ### UI Binding
 
