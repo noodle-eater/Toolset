@@ -27,6 +27,11 @@ namespace NoodleEater.Canvas.Editor
         [DidReloadScripts]
         public static void ValidateUIBinding()
         {
+            if (Application.isPlaying)
+            {
+                return;
+            }
+            
             var canValidate = EditorPrefs.GetBool(validationKey);
             if(!canValidate) 
             {
